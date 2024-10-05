@@ -12,9 +12,9 @@ import { ResizableHandleAlt, ResizablePanel, ResizablePanelGroup } from '~/compo
 import { useMediaQuery, useLocalStorage, useLocalize } from '~/hooks';
 import useSideNavLinks from '~/hooks/Nav/useSideNavLinks';
 import NavToggle from '~/components/Nav/NavToggle';
+import { cn, getEndpointField } from '~/utils';
 import { useChatContext } from '~/Providers';
 import Switcher from './Switcher';
-import { cn } from '~/utils';
 import Nav from './Nav';
 
 interface SidePanelProps {
@@ -81,6 +81,10 @@ const SidePanel = ({
     return typeof activePanel === 'string' ? activePanel : undefined;
   }, []);
 
+  const endpointType = useMemo(
+    () => getEndpointField(endpointsConfig, endpoint, 'type'),
+    [endpoint, endpointsConfig],
+  );
   const assistants = useMemo(() => endpointsConfig?.[endpoint ?? ''], [endpoint, endpointsConfig]);
   const agents = useMemo(() => endpointsConfig?.[endpoint ?? ''], [endpoint, endpointsConfig]);
 
@@ -108,6 +112,7 @@ const SidePanel = ({
     hidePanel,
     assistants,
     keyProvided,
+    endpointType,
     interfaceConfig,
   });
 
@@ -249,7 +254,7 @@ const SidePanel = ({
             localStorage.setItem('react-resizable-panels:collapsed', 'true');
           }}
           className={cn(
-            'sidenav hide-scrollbar border-l border-border-light bg-surface-primary-alt transition-opacity',
+            'sidenav hide-scrollbar border-l border-border-light bg-background transition-opacity',
             isCollapsed ? 'min-w-[50px]' : 'min-w-[340px] sm:min-w-[352px]',
             (isSmallScreen && isCollapsed && (minSize === 0 || collapsedSize === 0)) || fullCollapse
               ? 'hidden min-w-0'
@@ -259,7 +264,7 @@ const SidePanel = ({
           {interfaceConfig.modelSelect && (
             <div
               className={cn(
-                'sticky left-0 right-0 top-0 z-[100] flex h-[52px] flex-wrap items-center justify-center bg-surface-primary-alt',
+                'sticky left-0 right-0 top-0 z-[100] flex h-[52px] flex-wrap items-center justify-center bg-background',
                 isCollapsed ? 'h-[52px]' : 'px-2',
               )}
             >
