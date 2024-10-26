@@ -607,7 +607,9 @@ const sharedOpenAIModels = [
 ];
 
 const sharedAnthropicModels = [
+  'claude-3-5-sonnet-20241022',
   'claude-3-5-sonnet-20240620',
+  'claude-3-5-sonnet-latest',
   'claude-3-opus-20240229',
   'claude-3-sonnet-20240229',
   'claude-3-haiku-20240307',
@@ -752,6 +754,7 @@ export const visionModels = [
 ];
 export enum VisionModes {
   generative = 'generative',
+  agents = 'agents',
 }
 
 export function validateVisionModel({
@@ -1070,7 +1073,7 @@ export enum TTSProviders {
 /** Enum for app-wide constants */
 export enum Constants {
   /** Key for the app's version. */
-  VERSION = 'v0.7.5-rc2',
+  VERSION = 'v0.7.5',
   /** Key for the Custom Config's version (librechat.yaml). */
   CONFIG_VERSION = '1.1.7',
   /** Standard value for the first message's `parentMessageId` value, to indicate no parent exists. */
