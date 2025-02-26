@@ -446,6 +446,7 @@ export const intefaceSchema = z
       })
       .optional(),
     termsOfService: termsOfServiceSchema.optional(),
+    customWelcome: z.string().optional(),
     endpointsMenu: z.boolean().optional(),
     modelSelect: z.boolean().optional(),
     parameters: z.boolean().optional(),
@@ -456,6 +457,7 @@ export const intefaceSchema = z
     prompts: z.boolean().optional(),
     agents: z.boolean().optional(),
     temporaryChat: z.boolean().optional(),
+    runCode: z.boolean().optional(),
   })
   .default({
     endpointsMenu: true,
@@ -468,6 +470,7 @@ export const intefaceSchema = z
     prompts: true,
     agents: true,
     temporaryChat: true,
+    runCode: true,
   });
 
 export type TInterfaceConfig = z.infer<typeof intefaceSchema>;
@@ -645,6 +648,8 @@ const sharedOpenAIModels = [
 ];
 
 const sharedAnthropicModels = [
+  'claude-3-7-sonnet-latest',
+  'claude-3-7-sonnet-20250219',
   'claude-3-5-haiku-20241022',
   'claude-3-5-sonnet-20241022',
   'claude-3-5-sonnet-20240620',
@@ -704,7 +709,7 @@ export const defaultModels = {
     // Gemini 2.0 Models
     'gemini-2.0-flash-001',
     'gemini-2.0-flash-exp',
-    'gemini-2.0-flash-lite-preview-02-05',
+    'gemini-2.0-flash-lite',
     'gemini-2.0-pro-exp-02-05',
     // Gemini 1.5 Models
     'gemini-1.5-flash-001',
